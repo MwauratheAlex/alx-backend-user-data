@@ -4,10 +4,11 @@ from api.v1.views import app_views
 from flask import request, jsonify
 from models.user import User
 from os import getenv
+from typing import Tuple
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
-def login():
+def login() -> Tuple[str, int]:
     """ POST /auth_session/login"""
     email = request.form.get('email')
     password = request.form.get('password')
@@ -36,7 +37,7 @@ def login():
 
 @app_views.route(
         '/auth_session/logout', methods=['DELETE'], strict_slashes=False)
-def logout():
+def logout() -> Tuple[str, int]:
     """ DELETE /api/v1/auth_session/logout
     Returns:
         - empty json object
@@ -44,5 +45,5 @@ def logout():
     from api.v1.app import auth
     session_destroyed = auth.destroy_session(request)
     if session_destroyed:
-        return jsonify({})
+        return jsonify({}), 200
     abort(404)
