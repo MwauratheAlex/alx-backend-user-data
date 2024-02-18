@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Module contains class defination for a User Model"""
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 
@@ -6,7 +7,7 @@ Base = declarative_base()
 
 
 class User(Base):
-
+    """User Model"""
     __tablename__ = "users"
     id = Column(
         Integer,
