@@ -30,7 +30,7 @@ def users():
 
 @app.route("/sessions", methods=["POST"])
 def login():
-    """POST /sessions """
+    """POST /sessions"""
     email = request.form.get('email')
     password = request.form.get('password')
     if not (email and password):
