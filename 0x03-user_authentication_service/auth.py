@@ -45,7 +45,7 @@ class Auth:
         except Exception:
             return False
 
-    def create_session(self, email: str):
+    def create_session(self, email: str) -> str | None:
         """Creates a session for user"""
         try:
             user = self._db.find_user_by(email=email)
