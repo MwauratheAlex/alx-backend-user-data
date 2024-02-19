@@ -11,7 +11,7 @@ AUTH = Auth()
 @app.route("/", methods=["GET"])
 def index():
     """GET /"""
-    return jsonify({"message": "Mbumwa auth service"})
+    return jsonify({"message": "Bienvenue"})
 
 
 @app.route("/users", methods=["POST"])
