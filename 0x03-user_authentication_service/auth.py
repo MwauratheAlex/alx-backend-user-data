@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Module contains auth helper functions"""
+
 import bcrypt
 from sqlalchemy.orm.exc import NoResultFound
 from db import DB
 from user import User
 import uuid
+from typing import Optional
 
 
 def _hash_password(password: str) -> bytes:
@@ -45,7 +47,7 @@ class Auth:
         except Exception:
             return False
 
-    def create_session(self, email: str) -> str | None:
+    def create_session(self, email: str) -> Optional[str]:
         """Creates a session for user"""
         try:
             user = self._db.find_user_by(email=email)
