@@ -3,9 +3,10 @@
 from flask import Flask, jsonify
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
-@app.route("/", strict_slashes=False, methods=["GET"])
+@app.route("/", methods=["GET"])
 def index():
     """Index page"""
     return jsonify({"message": "Bienvenue"})
