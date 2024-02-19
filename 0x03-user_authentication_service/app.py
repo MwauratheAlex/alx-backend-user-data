@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Module contais a flask app"""
-from flask import Flask, jsonify, make_response, request, abort
+from flask import Flask, jsonify, make_response, redirect, request, abort
 from auth import Auth
 
 app = Flask(__name__)
@@ -42,6 +42,19 @@ def login():
     if session_id:
         response.set_cookie('session_id', session_id)
     return response
+
+
+@app.route("DELETE /sessions", methods=["DELETE"])
+def logout():
+    """DELETE /sessions"""
+    session_id = request.cookies.get("session_id")
+    if not session_id:
+        abort(403)
+    user = AUTH.get_user_from_session_id(session_id)
+    if not user:
+        abort(403)
+    AUTH.destroy_session(user.id)
+    return redirect(location="/")
 
 
 if __name__ == "__main__":
