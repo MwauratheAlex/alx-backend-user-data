@@ -5,10 +5,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-from sqlalchemy.types import String
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
 from user import Base, User
+import bcrypt
 
 
 class DB:
@@ -57,3 +57,7 @@ class DB:
                 raise ValueError(f'No corresponding user attribute for {key}')
             setattr(user, key, value)
         self._session.commit()
+
+    def _hash_password(self, password: str) -> bytes:
+        """Hashes a password"""
+        return bcrypt.hashpw(str.encode(password), bcrypt.gensalt())
