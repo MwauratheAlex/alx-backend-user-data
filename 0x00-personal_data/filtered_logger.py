@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """filter_datum module"""
+import os
 import re
 from typing import List
 import logging
+import mysql.connector
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
@@ -38,6 +40,17 @@ def get_logger() -> logging.Logger:
     logger.addHandler(stream_handler)
 
     return logger
+
+
+def get_db():
+    """Returns a connector to the database"""
+    db_config = {
+        "user": os.getenv("PERSONAL_DATA_DB_USERNAME", None) or "root",
+        "password": os.getenv("PERSONAL_DATA_DB_PASSWORD", None) or "",
+        "host": os.getenv("PERSONAL_DATA_DB_HOST", None) or "localhost",
+        "database": os.getenv("PERSONAL_DATA_DB_NAME", None),
+    }
+    return mysql.connector.connect(**db_config)
 
 
 class RedactingFormatter(logging.Formatter):
