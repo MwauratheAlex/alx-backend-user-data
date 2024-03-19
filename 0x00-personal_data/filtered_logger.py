@@ -18,7 +18,7 @@ def filter_datum(
         separator: a string representing by which character is separating all
         fields in the log line (message)
     """
-    pattern = r''.join(r'(?<={}=)([^{}]+)|'
-                       .format(field, separator) for field in fields)
+    pattern = r'|'.join(r'(?<={}=)([^{}]+)'
+                        .format(field, separator) for field in fields)
 
-    return re.sub(pattern[:-1], redaction, message)
+    return re.sub(pattern, redaction, message)
