@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Password hashing module"""
 
 import bcrypt
 
