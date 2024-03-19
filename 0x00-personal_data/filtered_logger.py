@@ -50,10 +50,8 @@ def get_db() -> MySQLConnection:
         "port": 3306,
         "user": os.getenv("PERSONAL_DATA_DB_USERNAME", "root"),
         "password": os.getenv("PERSONAL_DATA_DB_PASSWORD", ""),
-        "database": os.getenv("PERSONAL_DATA_DB_NAME", None),
+        "database": os.getenv("PERSONAL_DATA_DB_NAME"),
     }
-    if db_config["database"] is None:
-        return None
     return mysql.connector.connect(**db_config)
 
 
