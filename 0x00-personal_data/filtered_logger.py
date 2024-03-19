@@ -51,7 +51,12 @@ def get_db() -> MySQLConnection:
         "host": os.getenv("PERSONAL_DATA_DB_HOST", None) or "localhost",
         "database": os.getenv("PERSONAL_DATA_DB_NAME", None) or "",
     }
-    return mysql.connector.connect(**db_config)
+    return mysql.connector.connect(
+        host=db_config["host"],
+        # port=3306,
+        user=db_config["user"],
+        password=db_config["password"],
+        database=db_config["database"],)
 
 
 class RedactingFormatter(logging.Formatter):
