@@ -49,7 +49,7 @@ def get_db() -> MySQLConnection:
         "user": os.getenv("PERSONAL_DATA_DB_USERNAME", None) or "root",
         "password": os.getenv("PERSONAL_DATA_DB_PASSWORD", None) or "",
         "host": os.getenv("PERSONAL_DATA_DB_HOST", None) or "localhost",
-        "database": os.getenv("PERSONAL_DATA_DB_NAME", None),
+        "database": os.getenv("PERSONAL_DATA_DB_NAME", None) or "",
     }
     return mysql.connector.connect(**db_config)
 
