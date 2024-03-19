@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 """filter_datum module"""
 import os
 import re
@@ -75,6 +76,7 @@ class RedactingFormatter(logging.Formatter):
 
 
 def main():
+    """Program entry point"""
     logger = get_logger()
     db = get_db()
     cursor = db.cursor()
